@@ -1,10 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Publicacion
-from .forms import PublicacionForm
+from .forms import PublicacionModelForm
 from django.db.models import Q
 from django.core.paginator import Paginator
 
-def lista_publicaciones(request):
+def inicio(request):
+    return render(request, 'inicio.html')
+
+def listar_publicaciones(request):
     publicaciones = Publicacion.objects.all()
     # Filtrado:
     fecha_publicacion = request.GET.get('fecha_publicacion')
@@ -30,3 +33,14 @@ def lista_publicaciones(request):
 def detalle_publicacion(request, pk):
     publicacion = get_object_or_404(Publicacion, pk=pk)
     return render(request, 'blog/detalle_publicacion.html', {'publicacion': publicacion})
+
+def agregar_publicacion(request):
+    if request.method == 'POST':
+        form = PublicacionModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_publicaciones')
+    else:
+        form = PublicacionModelForm()
+    return render(request, 'agregar_producto.html', {'form': form})
+

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> publicacion.titulo </title>
+</head>
+<body>
+    <h1>{{ publicacion.titulo }}</h1>
+    <p>{{ publicacion.fecha_publicacion }} |{{ publicacion.categoria }} | {{ publicacion.autor }}</p>
+    <p>{{ publicacion.contenido }}</p>
+
+<!-- Enlaces para volver a la lista de publicaciones y agregar una nueva publicación -->
+    <a href="{% url 'lista_publicaciones' %}">Volver a la Lista</a>
+    <a href="{% url 'agregar_publicacion' %}">Agregar Nueva Publicación</a>
+    <a href="{% url 'inicio' %}">Volver a Inicio</a> <!-- Botón de Inicio -->
+</body>
+</html>

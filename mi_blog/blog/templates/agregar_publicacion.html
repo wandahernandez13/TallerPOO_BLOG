@@ -1,0 +1,27 @@
+<!--Muestra la plantilla para agregar una nueva publicación, con opción de volver al inicio o ver la lista de publicaciones -->
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Agregar Publicación</title>
+</head>
+<body>
+    <h1>Agregar Nueva Publicación</h1>
+
+    <form method='POST'>
+        {% csrf token %}
+        {{ form.as_p }}
+        {% if form.errors %} <!-- Verifica si hay errores en el formulario -->
+        <ul>
+          {% for field in form %}
+            {% if field.errors %}  <!-- Muestra errores específicos de cada campo -->
+            {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <button type="submit">Guardar Publicación</button>
+    </form>
+    <!-- Enlace para volver a la lista de publicaciones -->
+    <a href="{% url 'lista_publicaciones' %}">Volver a la Lista</a>
+    <a href="{% url 'inicio' %}">Volver a Inicio</a> <!-- Botón de Inicio -->
+</body>
+</html>
