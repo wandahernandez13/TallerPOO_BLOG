@@ -44,3 +44,13 @@ def agregar_publicacion(request):
         form = PublicacionModelForm()
     return render(request, 'agregar_producto.html', {'form': form})
 
+def editar_publicacion(request, pk):
+    publicacion = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=publicacion)
+        if form.is_valid():
+            form.save()
+            return redirect('detalle_publicacion', pk=pk)
+    else:
+        form = PostForm(instance=publicacion)
+    return render(request, 'editar_publicacion.html', {'form': form})
