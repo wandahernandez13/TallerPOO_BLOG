@@ -2,9 +2,34 @@
 <html>
 <head>
     <title>Editar Publicación</title>
+    <style>
+        body
+        {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: #101148;
+            background-color: #d4cdff;
+        }
+        button
+        {
+            border: none;
+            background: #29b881;
+            font-weight: bold;
+        }
+        button:hover
+        {
+            color: white;
+            background-color: #101148;
+        }
+        button:active
+         {
+            background-color: #24978b
+        }
+    
+    </style>
 </head>
 <body>
     <h1>Editar Publicación</h1>
+
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}

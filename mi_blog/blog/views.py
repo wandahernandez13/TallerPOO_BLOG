@@ -26,6 +26,7 @@ def lista_publicaciones(request):
     paginator = Paginator(publicaciones, 10)  # 10 publicaciones por página
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+
     return render(request, 'blog/lista_publicaciones.html', {
         'page_obj': page_obj, 
         'query': query,
@@ -35,6 +36,7 @@ def lista_publicaciones(request):
 
 def detalle_publicacion(request, pk):
     publicacion = get_object_or_404(Publicacion, pk=pk)
+
     return render(request, 'blog/detalle_publicacion.html', {'publicacion': publicacion})
 
 def agregar_publicacion(request):
@@ -45,6 +47,7 @@ def agregar_publicacion(request):
             return redirect('lista_publicaciones')
     else:
         form = PublicacionForm()
+
     return render(request, 'blog/agregar_publicacion.html', {'form': form})
 
 def editar_publicacion(request, pk):
@@ -56,4 +59,5 @@ def editar_publicacion(request, pk):
             return redirect('detalle_publicacion', pk=publicacion.pk)
     else:
         form = PublicacionForm(instance=publicacion)
-    return render(request, 'blog/editar_publicacion.html', {'form': form})
+
+    return render(request, 'blog/editar_publicacion.html', {'form': form, 'publicacion': publicacion})
