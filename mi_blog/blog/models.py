@@ -8,4 +8,4 @@ class Publicacion(models.Model):
     autor = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.titulo
+        return str(self.titulo)

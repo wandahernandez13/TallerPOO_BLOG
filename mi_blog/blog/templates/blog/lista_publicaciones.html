@@ -1,0 +1,44 @@
+<!-- Muestra la lista de publicaciones con opciones para buscar, navegar entre páginas y filtrar-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Publicaciones | Mi Blog</title>
+</head>
+<body>
+    <h1>Lista de Publicaciones</h1>
+
+    <form method="GET">
+        <input type="text" name="q" placeholder="Buscar">
+        <input type="date" name="fecha_publicacion">
+        <input type="text" name="categoria" placeholder="Categoría">
+        <button type="submit">Filtrar</button>
+    </form>
+    
+    <ul>
+        {% for publicacion in page_obj %}
+        <li>
+            <a href="{% url 'detalle_publicacion' publicacion.pk %}">
+                {{ publicacion.titulo }}
+            </a> - {{ publicacion.fecha_publicacion }}
+         
+        </li>
+    {% endfor %}
+    </ul>
+
+    <div  class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+            {% endif %}
+        </span>
+    </div>
+    <div class="action-links">
+        <!-- Enlace para agregar publicación-->
+        <a href="{% url 'agregar_publicacion' %}">Agregar Nueva Publicación</a>
+    </div>
+</body>
+</html>
